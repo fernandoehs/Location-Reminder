@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Location-Reminder.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/starter/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/gradle.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ujsHptcO8EphVUimhBPLUvTqNG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/starter" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="" />
+      <created>1625190247451</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625190247451</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1786" y="248" key="FileChooserDialogImpl" timestamp="1625190484801">
+      <screen x="1366" y="0" width="1280" height="984" />
+    </state>
+    <state x="1786" y="248" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@1366.0.1280.984" timestamp="1625190484801" />
+  </component>
+</project>

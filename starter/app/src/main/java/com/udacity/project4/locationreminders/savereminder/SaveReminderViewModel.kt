@@ -3,10 +3,10 @@ package com.udacity.project4.locationreminders.savereminder
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PointOfInterest
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseViewModel
-import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.locationreminders.data.ReminderDataSource
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
@@ -62,7 +62,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
             )
             showLoading.value = false
             showToast.value = app.getString(R.string.reminder_saved)
-            navigationCommand.value = NavigationCommand.Back
+           //navigationCommand.value = NavigationCommand.Back
         }
     }
 
@@ -80,5 +80,16 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
             return false
         }
         return true
+    }
+
+    fun updateLocationForTest(
+            latLng: LatLng,
+            location: String,
+            pointOfInterest: PointOfInterest? = null
+    ) {
+        selectedPOI.postValue(pointOfInterest)
+        latitude.postValue(latLng.latitude)
+        longitude.postValue(latLng.longitude)
+        reminderSelectedLocationStr.postValue(location)
     }
 }

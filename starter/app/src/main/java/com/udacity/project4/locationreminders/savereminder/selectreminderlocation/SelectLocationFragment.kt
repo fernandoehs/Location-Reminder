@@ -3,20 +3,18 @@ package com.udacity.project4.locationreminders.savereminder.selectreminderlocati
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.*
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -32,6 +30,7 @@ import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
 import java.util.*
 
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     //Use Koin to get the view model of the SaveReminder
@@ -43,6 +42,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentSelectLocationBinding
     private lateinit var map: GoogleMap
     private var poi: PointOfInterest? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val zoomLevel = 15f
 
 
     override fun onCreateView(
@@ -119,6 +120,21 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.size > 0 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 enableMyLocation()
+            } else {
+                // Permission denied.
+                Snackbar.make(
+                    requireView(),
+                    R.string.permission_denied_explanation, Snackbar.LENGTH_LONG
+                )
+                    .setAction(R.string.settings) {
+                        // Displays App settings screen.
+                        startActivity(Intent().apply {
+                            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            data = Uri.fromParts("package", requireActivity().packageName, null)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        })
+
+                    }.show()
             }
         }
     }
@@ -202,12 +218,24 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
-            map.setMyLocationEnabled(true)
+            map.isMyLocationEnabled = true
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    location?.let {
+                        val currentlocation = LatLng(it.latitude, it.longitude)
+                        map.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                currentlocation,
+                                zoomLevel
+                            )
+                        )
+                    }
+                }
         }
         else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+            requestPermissions(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_LOCATION_PERMISSION
             )
         }
