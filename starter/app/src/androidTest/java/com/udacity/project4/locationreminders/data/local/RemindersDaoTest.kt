@@ -8,6 +8,7 @@ import androidx.test.filters.SmallTest
 import com.udacity.project4.FakeData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,11 +21,10 @@ import org.junit.runner.RunWith
 @SmallTest
 class RemindersDaoTest {
 
+    private lateinit var database: RemindersDatabase
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
-
-    private lateinit var database: RemindersDatabase
 
     @Before
     fun setup() {
@@ -34,8 +34,13 @@ class RemindersDaoTest {
         ).build()
     }
 
+    @After
+    fun closeDb() = database.close()
+
+
     @Test
    fun insert_whenValidRecord_IsAccessibleOnTable() = runBlockingTest{
+
         val reminder = FakeData.reminders[0]
 
         database.reminderDao().saveReminder(reminder)
@@ -52,19 +57,21 @@ class RemindersDaoTest {
     }
 
     @Test
-    suspend fun delete_whenItemsExist_Then_AreCleared() {
-        val repository = database.reminderDao()
-        repository.saveReminder(FakeData.reminders[0])
-        repository.saveReminder(FakeData.reminders[1])
+    fun delete_whenItemsExist_Then_AreCleared() = runBlockingTest {
 
-        val existingReminders = repository.getReminders()
+            val repository = database.reminderDao()
+            repository.saveReminder(FakeData.reminders[0])
+            repository.saveReminder(FakeData.reminders[1])
 
-        assert(existingReminders.size == 2)
+            val existingReminders = repository.getReminders()
 
-        repository.deleteAllReminders()
+            assert(existingReminders.size == 2)
 
-        val afterDeleteSize = repository.getReminders().size
+            repository.deleteAllReminders()
 
-        assert(afterDeleteSize == 0)
-    }
+            val afterDeleteSize = repository.getReminders().size
+
+            assert(afterDeleteSize == 0)
+        }
 }
+

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Location-Reminder.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/starter/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/starter/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/gradle.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +19,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/starter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="SvnConfiguration">
