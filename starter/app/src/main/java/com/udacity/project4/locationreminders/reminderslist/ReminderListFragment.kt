@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
 import com.udacity.project4.authentication.AuthenticationActivity
@@ -83,10 +84,21 @@ class ReminderListFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
+                // FIXED -> 1. After the users log out, they can continue using the app.
                 AuthUI.getInstance()
                     .signOut(requireContext())
                     .addOnCompleteListener {
-                        startActivity(Intent(context, AuthenticationActivity::class.java))
+                        if (it.isSuccessful) {
+                            val activity = requireActivity()
+                            startActivity(Intent(activity, AuthenticationActivity::class.java))
+                            activity.finish()
+                        } else {
+                           Snackbar.make(
+                                 requireView(),
+                                    getString(R.string.logout_failed),
+                                   Snackbar.LENGTH_SHORT
+                           ).show()
+                        }
                     }
             }
         }

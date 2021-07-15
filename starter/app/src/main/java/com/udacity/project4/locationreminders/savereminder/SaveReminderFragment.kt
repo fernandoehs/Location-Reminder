@@ -79,21 +79,47 @@ class SaveReminderFragment : BaseFragment() {
             val latitude = _viewModel.latitude.value
             val longitude = _viewModel.longitude.value
 
-            val reminder = ReminderDataItem(
-                    title,
-                    description,
-                    location,
-                    latitude,
-                    longitude
+//            val reminder = ReminderDataItem(
+//                    title,
+//                    description,
+//                    location,
+//                    latitude,
+//                    longitude
+//            )
+//
+//            currentReminder = reminder
+//
+//           if(_viewModel.validateAndSaveReminder(reminder)) {
+//              checkDeviceLocationSettingsAndStartGeofence(true, reminder)
+//         }
+            checkPermissionsAndStartGeofencing(
+                    reminderDataItem = ReminderDataItem(
+                            title,
+                            description,
+                            location,
+                            latitude,
+                            longitude
+                    )
             )
 
-            currentReminder = reminder
-
-//            if(_viewModel.validateAndSaveReminder(reminder)) {
-              checkDeviceLocationSettingsAndStartGeofence(true, reminder)
-//            }
         }
     }
+
+    private fun checkPermissionsAndStartGeofencing(reminderDataItem: ReminderDataItem) {
+        if (!foregroundAndBackgroundLocationPermissionApproved()) {
+            requestForegroundAndBackgroundLocationPermissions()
+        } else {
+            checkDeviceLocationSettingsAndStartGeofence( reminderDataItem = reminderDataItem)
+        }
+    }
+
+//    private fun requestPermissions() {
+//        if (!foregroundAndBackgroundLocationPermissionApproved()) {
+//            requestForegroundAndBackgroundLocationPermissions()
+//        } else {
+//            checkDeviceLocationSettingsAndStartGeofence(true, currentReminder)
+//        }
+//    }
 
 //    override fun onStart() {
 //        super.onStart()
@@ -162,13 +188,7 @@ class SaveReminderFragment : BaseFragment() {
         return foregroundLocationApproved && backgroundPermissionApproved
     }
 
-    private fun requestPermissions() {
-        if (!foregroundAndBackgroundLocationPermissionApproved()) {
-            requestForegroundAndBackgroundLocationPermissions()
-        } else {
-            checkDeviceLocationSettingsAndStartGeofence(true, currentReminder)
-        }
-    }
+
 
     @TargetApi(29 )
     private fun requestForegroundAndBackgroundLocationPermissions() {
@@ -190,7 +210,7 @@ class SaveReminderFragment : BaseFragment() {
         )
     }
 
-    private fun checkDeviceLocationSettingsAndStartGeofence(resolve:Boolean = true, reminder: ReminderDataItem?) {
+    private fun checkDeviceLocationSettingsAndStartGeofence(resolve:Boolean = true, reminderDataItem: ReminderDataItem? = null) {
         val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_LOW_POWER
         }
@@ -211,13 +231,13 @@ class SaveReminderFragment : BaseFragment() {
                         requireView(),
                         R.string.location_required_error, Snackbar.LENGTH_INDEFINITE
                 ).setAction(android.R.string.ok) {
-                    checkDeviceLocationSettingsAndStartGeofence(true, reminder)
+                    checkDeviceLocationSettingsAndStartGeofence(true, reminderDataItem)
                 }.show()
             }
         }
         locationSettingsResponseTask.addOnCompleteListener {
             if ( it.isSuccessful ) {
-                addGeofenceForReminder(reminder)
+                addGeofenceForReminder(reminderDataItem)
             }
         }
     }
