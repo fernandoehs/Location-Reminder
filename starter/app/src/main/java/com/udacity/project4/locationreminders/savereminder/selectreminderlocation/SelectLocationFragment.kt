@@ -46,6 +46,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private val zoomLevel = 15f
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -55,16 +56,18 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         binding.viewModel = _viewModel
         binding.lifecycleOwner = this
 
+        binding.saveButton.setOnClickListener {
+
+                onLocationSelected()
+
+
+        }
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(true)
 
         val mapFragment =
-            childFragmentManager.findFragmentById(R.id.googleMapSupport) as SupportMapFragment
+                childFragmentManager.findFragmentById(R.id.googleMapSupport) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        binding.saveButton.setOnClickListener {
-            onLocationSelected()
-        }
 
         return binding.root
     }
@@ -101,14 +104,26 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         val longitude = -8.609281195141374
         val zoomLevel = 15f
 
-        val ctw = LatLng(latitude, longitude)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ctw, zoomLevel))
-        map.addMarker(MarkerOptions().position(ctw))
+//        val ctw = LatLng(latitude, longitude)
+//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ctw, zoomLevel))
+//        map.addMarker(MarkerOptions().position(ctw))
+
+        //Set selected poi marker if exists
+        _viewModel.selectedPOI.value?.let { poi ->
+            val poiMarker = map.addMarker(
+                    MarkerOptions()
+                            .position(poi.latLng)
+                            .title(poi.name)
+            )
+            poiMarker.showInfoWindow()
+        }
 
         setMapLongClick(map)
         setPoiClick(map)
         setMapStyle(map)
         enableMyLocation()
+
+
     }
 
     override fun onRequestPermissionsResult(
@@ -152,6 +167,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun setMapLongClick(map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
+            map.clear()
             // A Snippet is Additional text that's displayed below the title.
             val snippet = String.format(
                 Locale.getDefault(),
@@ -159,6 +175,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
                 latLng.latitude,
                 latLng.longitude
             )
+
+
             map.addMarker(
                 MarkerOptions()
                     .position(latLng)
@@ -167,8 +185,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
             )
-
-            val location = PointOfInterest(latLng, "CustomPOI", "CustomPOI")
+            //var completeAddress = latLng.latitude.toString() + ", " + latLng.longitude.toString()
+            val location = PointOfInterest(latLng, UUID.randomUUID().toString(), "Custom POI")
             this.poi = location
 
 
@@ -178,6 +196,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun setPoiClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
+            map.clear()
             this.poi = poi
             val poiMarker = map.addMarker(
                 MarkerOptions()
