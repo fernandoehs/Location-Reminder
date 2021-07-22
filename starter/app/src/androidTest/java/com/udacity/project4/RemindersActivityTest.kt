@@ -7,7 +7,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -69,6 +68,7 @@ class RemindersActivityTest :
             }
             single { RemindersLocalRepository(get()) as ReminderDataSource }
             single { LocalDB.createRemindersDao(appContext) }
+
         }
         //declare a new koin module
         startKoin {
@@ -113,25 +113,19 @@ class RemindersActivityTest :
 
         onView(withId(R.id.saveReminder)).perform(ViewActions.click())
 
-        onView(ViewMatchers.withText("NEW TITLE")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        onView(ViewMatchers.withText("NEW DESCRIPTION")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withText("NEW TITLE")).check(matches(ViewMatchers.isDisplayed()))
+        onView(withText("NEW DESCRIPTION")).check(matches(ViewMatchers.isDisplayed()))
         activityScenario.close()
 
         //TEST Toast
         onView(withText("TOAST")).inRoot(ToastMatcher()).check(
-            ViewAssertions.matches(withText("TOAST")))
+            matches(withText("TOAST"))
+        )
 
         //TEST Snackbar
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText(R.string.reminder_saved)))
 
-
     }
-
-
-
-
-
-//    TODO: add End to End testing to the app
 
 }
