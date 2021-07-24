@@ -43,4 +43,13 @@
     <string name="logout_failed">Error when logging out...</string>
     <string name="select_location_err">Please select location</string>
     <string name="whatever_is_your_text">Its OK</string>
+    <string name="close">close</string>
+
+    <!-- Detail activity !-->
+    <string name="detail_reminder_title">title: %s</string>
+    <string name="detail_reminder_description">description: %s</string>
+    <string name="detail_reminder_location">location: %s</string>
+    <string name="detail_reminder_lat">lat: %.2f</string>
+    <string name="detail_reminder_lng">lng: %.2f</string>
+
 </resources>

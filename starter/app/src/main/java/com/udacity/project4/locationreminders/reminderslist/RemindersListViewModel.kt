@@ -30,7 +30,6 @@ class RemindersListViewModel(
                 is Result.Success<*> -> {
                     val dataList = ArrayList<ReminderDataItem>()
                     dataList.addAll((result.data as List<ReminderDTO>).map { reminder ->
-
                         ReminderDataItem(
                             reminder.title,
                             reminder.description,
@@ -45,8 +44,6 @@ class RemindersListViewModel(
                 is Result.Error ->
                     showSnackBar.value = result.message
             }
-
-            //check if no data has to be shown
             invalidateShowNoData()
         }
     }
