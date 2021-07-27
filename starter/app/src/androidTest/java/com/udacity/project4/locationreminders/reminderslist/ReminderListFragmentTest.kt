@@ -2,12 +2,12 @@ package com.udacity.project4.locationreminders.reminderslist
 
 import android.app.Application
 import android.os.Bundle
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -18,10 +18,15 @@ import com.udacity.project4.locationreminders.data.ReminderDataSource
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
 import com.udacity.project4.locationreminders.data.local.LocalDB
 import com.udacity.project4.locationreminders.data.local.RemindersLocalRepository
+import com.udacity.project4.util.DataBindingIdlingResource
+import com.udacity.project4.util.SwipeRefreshLayoutMatchers.isRefreshing
+import com.udacity.project4.util.monitorFragment
+import com.udacity.project4.utils.EspressoIdlingResource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.CoreMatchers
+import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -30,85 +35,154 @@ import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.get
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
+import org.mockito.Mockito
+import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
 //UI Testing
 @MediumTest
-class ReminderListFragmentTest : AutoCloseKoinTest() {
+class ReminderListFragmentTest :
+    AutoCloseKoinTest(){
 
     private lateinit var repository: ReminderDataSource
-    private lateinit var appContext: Application
+    private lateinit var app: Application
 
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    private val dataBindingIdlingResource = DataBindingIdlingResource()
 
     @Before
-    fun setUp() {
-        appContext = ApplicationProvider.getApplicationContext()
+    fun init() {
         stopKoin()
-
-        appContext = ApplicationProvider.getApplicationContext()
+        app = ApplicationProvider.getApplicationContext()
         val myModule = module {
             viewModel {
                 RemindersListViewModel(
-                    appContext,
+                    app,
                     get() as ReminderDataSource
                 )
             }
             single { RemindersLocalRepository(get()) as ReminderDataSource }
-            single { LocalDB.createRemindersDao(appContext) }
+            single { LocalDB.createRemindersDao(app) }
         }
-
+        //declare a new koin module
         startKoin {
             modules(listOf(myModule))
         }
-
+        //Get our real repository
         repository = get()
 
-    }
-
-    private fun seed() = runBlocking {
-        val reminder1 = ReminderDTO("Porto", "Going to Porto", "Oporto", 30.000, 30.000, "PortoId")
-        val reminder2 = ReminderDTO("Lisboa", "Going to Lisbon", "Lisbon", 31.000, 31.000, "LisboaId")
-        repository.saveReminder(reminder1)
-        repository.saveReminder(reminder2)
-    }
-
-    @Test
-    fun navigationWhenAddReminderNavigateToSaveReminderFragment() {
-        val navigationMock = mock(NavController::class.java)
-
-        val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
-
-        scenario.onFragment { fragment ->
-            Navigation.setViewNavController(fragment.view!!, navigationMock)
+        //clear the data to start fresh
+        runBlocking {
+            repository.deleteAllReminders()
         }
 
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().register(dataBindingIdlingResource)
+    }
+
+    @After
+    fun cleanUp() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
+    }
+
+    @Test
+    fun remindersEmpty_noData() {
+        // Given
+        val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+        dataBindingIdlingResource.monitorFragment(scenario)
+
+        // Then
+        Espresso.onView(ViewMatchers.withId(R.id.noDataTextView))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun remindersNotEmpty_dataOnScreen() {
+        runBlocking {
+            // Given
+            val data = ReminderDTO(
+                title = "test",
+                description = "test desc",
+                location = "test location",
+                latitude = 0.0,
+                longitude = 0.0,
+                id = UUID.randomUUID().toString()
+            )
+            repository.saveReminder(data)
+
+            // When
+            val scenario =
+                launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+            dataBindingIdlingResource.monitorFragment(scenario)
+
+            // Then
+            Espresso.onView(ViewMatchers.withText(data.title))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
+    }
+
+    @Test
+    fun fabClicked_navigatedToAdd() {
+        // Given
+        val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+        dataBindingIdlingResource.monitorFragment(scenario)
+        val navController = Mockito.mock(NavController::class.java)
+        scenario.onFragment {
+            Navigation.setViewNavController(it.view!!, navController)
+        }
+
+        // When
         Espresso.onView(ViewMatchers.withId(R.id.addReminderFAB)).perform(ViewActions.click())
 
-        verify(navigationMock).navigate(ReminderListFragmentDirections.toSaveReminder())
+        // Then
+        Mockito.verify(navController).navigate(
+            ReminderListFragmentDirections.toSaveReminder()
+        )
     }
 
     @Test
-    fun whenDataExistsThenDataIsCorrectlyDisplayedInFragment() {
-        seed()
-        launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+    fun swipeRefreshed_turnedOffAfterUpdating() {
+        // Given
+        val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+        dataBindingIdlingResource.monitorFragment(scenario)
 
-        Espresso.onView(ViewMatchers.withId(R.id.reminderssRecyclerView))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("Porto"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("Lisboa"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        // When
+        Espresso.onView(ViewMatchers.withId(R.id.refreshLayout)).perform(ViewActions.swipeDown())
+
+        // Then
+        Espresso.onView(ViewMatchers.withId(R.id.refreshLayout))
+            .check(ViewAssertions.matches(CoreMatchers.not(isRefreshing())))
     }
 
     @Test
-    fun whenThereIsNoDataThenNoDataStringIsShown() {
-        launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
-        Espresso.onView(ViewMatchers.withId(R.id.noDataTextView))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.no_data))))
+    fun updateDataFromSwipeRefresh_dataUpdated() {
+        runBlocking {
+            // Given
+            val scenario =
+                launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
+            dataBindingIdlingResource.monitorFragment(scenario)
+            val data = ReminderDTO(
+                title = "test",
+                description = "test desc",
+                location = "test location",
+                latitude = 0.0,
+                longitude = 0.0,
+                id = UUID.randomUUID().toString()
+            )
+
+            // When
+            repository.saveReminder(data)
+            Espresso.onView(ViewMatchers.withId(R.id.noDataTextView))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            Espresso.onView(ViewMatchers.withId(R.id.refreshLayout))
+                .perform(ViewActions.swipeDown())
+
+            // Then
+            Espresso.onView(ViewMatchers.withId(R.id.refreshLayout))
+                .check(ViewAssertions.matches(CoreMatchers.not(isRefreshing())))
+            Espresso.onView(ViewMatchers.withText(data.title))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 }

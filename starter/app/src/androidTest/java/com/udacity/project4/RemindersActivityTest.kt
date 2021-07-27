@@ -97,7 +97,7 @@ class RemindersActivityTest :
 
 
     @Test
-    fun addReminder(): ViewInteraction = runBlocking {
+    fun addReminder(): ViewInteraction? = runBlocking {
 
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
