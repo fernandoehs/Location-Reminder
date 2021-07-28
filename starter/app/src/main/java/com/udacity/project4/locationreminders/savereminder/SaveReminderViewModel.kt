@@ -19,10 +19,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
     val reminderTitle = MutableLiveData<String>()
     val reminderDescription = MutableLiveData<String?>()
     private var _reminderSelectedLocationStr = MutableLiveData<String?>()
-    //val selectedPOI = MutableLiveData<PointOfInterest>()
-   // val latitude = MutableLiveData<Double>()
-    //val longitude = MutableLiveData<Double>()
-    val reminderSelectedLocationStr: LiveData<String?>
+     val reminderSelectedLocationStr: LiveData<String?>
     get() = _reminderSelectedLocationStr
     private var _latLng = MutableLiveData<LatLng?>()
     val latLng: LiveData<LatLng?>
@@ -36,9 +33,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
         reminderDescription.value = null
         _reminderSelectedLocationStr.value = null
         _latLng.value = null
-//        selectedPOI.value = null
-//        latitude.value = null
-//        longitude.value = null
+
     }
 
     /**

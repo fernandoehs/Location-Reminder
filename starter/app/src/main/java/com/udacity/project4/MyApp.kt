@@ -29,11 +29,9 @@ class MyApp : Application() {
                     get() as ReminderDataSource
                 )
             }
-            single {
-                AuthenticationViewModel(
-                    get(),
-                    get() as ReminderDataSource
-                )
+           viewModel {
+               AuthenticationViewModel(get())
+
             }
             //Declare singleton definitions to be later injected using by inject()
             single {
@@ -43,8 +41,9 @@ class MyApp : Application() {
                     get() as ReminderDataSource
                 )
             }
-            single { LocationUtils(this@MyApp) }
+           single { LocationUtils(this@MyApp) }
             single<ReminderDataSource> { RemindersLocalRepository(get()) }
+           //single { RemindersLocalRepository(get()) as ReminderDataSource }
             single { LocalDB.createRemindersDao(this@MyApp) }
         }
 

@@ -7,7 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.udacity.project4"
@@ -18,19 +18,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    testOptions.unitTests {
-        includeAndroidResources = true
-        returnDefaultValues = true
-    }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -45,21 +40,27 @@ android {
         exclude("META-INF/*.kotlin_module")
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
+
     //dataBinding {
     //    enabled = true
     //    enabledForTests = true
     //}
+
     buildFeatures {
         dataBinding true
-    }
-    sourceSets {
-        String sharedTestDir = 'src/sharedTest/java'
-        test {
-            java.srcDir sharedTestDir
-        }
-        androidTest {
-            java.srcDir sharedTestDir
-        }
     }
 }
 
@@ -75,16 +76,12 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
 
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     // Architecture Components
     //Navigation dependencies
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-rc1'
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
-    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-beta01'
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
@@ -102,8 +99,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     //Koin
-    implementation "org.koin:koin-android:2.0.1"
-    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
 
 
     // Dependencies for local unit tests
@@ -112,7 +109,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-    testImplementation "org.robolectric:robolectric:4.5.1"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
@@ -135,24 +132,22 @@ dependencies {
     androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
     androidTestImplementation "junit:junit:$junitVersion"
     // Once https://issuetracker.google.com/127986458 is fixed this can be testImplementation
-    implementation "androidx.fragment:fragment-testing:$fragmentVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     implementation "androidx.test:core:$androidXTestCoreVersion"
-    implementation "androidx.fragment:fragment:$fragmentVersion"
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
     androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
-
-
 
     //Maps & Geofencing
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
-    implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
 
-    //Firebase Auth && Multidex
-    implementation platform('com.google.firebase:firebase-bom:26.5.0')
-    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+    implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
+
+    // multidex
     implementation 'com.android.support:multidex:1.0.3'
-
 
 }
