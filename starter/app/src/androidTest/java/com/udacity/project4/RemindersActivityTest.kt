@@ -135,8 +135,13 @@ class RemindersActivityTest :
         onView(withText("description")).check(matches(isDisplayed()))
         onView(withText("My Location")).check(matches(isDisplayed()))
 
+        // Toast Test
         onView(withText(R.string.reminder_saved))
             .inRoot(RootMatchers.withDecorView(IsNot.not((getActivity(activityScenario)?.window?.decorView)))).check(matches(isDisplayed()))
+
+        //SnackBar Test
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText(R.string.whatever_is_your_text)))
 
         // Make sure the activity is closed before resetting the db:
         activityScenario.close()
