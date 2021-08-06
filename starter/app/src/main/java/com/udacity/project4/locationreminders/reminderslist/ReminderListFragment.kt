@@ -49,19 +49,20 @@ class ReminderListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //load authentication
         if (FirebaseAuth.getInstance().currentUser == null) {
             startActivity(Intent(this.activity!!, AuthenticationActivity::class.java))
             this.activity?.finish()
         }
 
-
         binding.lifecycleOwner = this
         setupRecyclerView()
         binding.addReminderFAB.setOnClickListener {
             navigateToAddReminder()
         }
-    }
+        }
+
 
     override fun onResume() {
         super.onResume()
