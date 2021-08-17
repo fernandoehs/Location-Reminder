@@ -83,7 +83,9 @@ class SaveReminderFragment : BaseFragment() {
                 latitude = _viewModel.latLng.value?.latitude,
                 longitude = _viewModel.latLng.value?.longitude
             )
-            checkPermissionsAndStartGeofencing(item)
+            if(_viewModel.validateEnteredData(item)) {
+                checkPermissionsAndStartGeofencing(item)
+            }
         }
     }
 
@@ -196,12 +198,15 @@ class SaveReminderFragment : BaseFragment() {
             .addGeofence(geofence)
             .build()
 
+        geofencingClient.removeGeofences(geofencePendingIntent)?.run {
+            addOnCompleteListener {
         geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)
             .addOnCompleteListener {
                 Log.d("Add Geofence", geofence.requestId)
                 _viewModel.validateAndSaveReminder(reminderDataItem)
-
+            }}
             }
+
     }
 
 

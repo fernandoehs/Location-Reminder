@@ -23,7 +23,7 @@ import com.udacity.project4.utils.LocationUtils
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
+@Suppress("DEPRECATED_IDENTITY_EQUALS", "DEPRECATION")
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     //Use Koin to get the view model of the SaveReminder
@@ -94,10 +94,10 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        googleMap?.let {
+        googleMap.let {
             map = it
             setMapStyle(map)
-            enableMyLocation()
+
             map.setOnMapClickListener { latlng ->
                 map.clear()
                 val marker = MarkerOptions()
@@ -122,10 +122,10 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 //        val longitude = -8.609281195141374
 //        val zoomLevel = 15f
 //
-////        val ctw = LatLng(latitude, longitude)
-////        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ctw, zoomLevel))
-////        map.addMarker(MarkerOptions().position(ctw))
-//
+//        val ctw = LatLng(latitude, longitude)
+//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ctw, zoomLevel))
+//        map.addMarker(MarkerOptions().position(ctw))
+////
 //        //Set selected poi marker if exists
 //        _viewModel.selectedPOI.value?.let { poi ->
 //            val poiMarker = map.addMarker(
@@ -136,10 +136,10 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 //            poiMarker.showInfoWindow()
 //        }
 //
-//        setMapLongClick(map)
+//      setMapLongClick(map)
 //        setPoiClick(map)
-//        setMapStyle(map)
-//        enableMyLocation()
+        setMapStyle(map)
+        enableMyLocation()
 
 
     }
@@ -171,7 +171,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 //            }
 //        }
 //    }
-
+//
 //    private fun onLocationSelected() {
 //        _viewModel.showToast.postValue("Point of interest selected")
 //        _viewModel.selectedPOI.postValue(poi)

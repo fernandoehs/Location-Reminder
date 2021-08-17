@@ -41,7 +41,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
      */
     fun validateAndSaveReminder(item: ReminderDataItem) {
         if (validateEnteredData(item)) {
-            saveReminder(item)
+           return saveReminder(item)
         }
     }
 
@@ -65,6 +65,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
             showToast.value = app.getString(R.string.reminder_saved)
            navigationCommand.value = NavigationCommand.Back
         }
+
     }
 
     fun locationSelected(latLng: LatLng) {

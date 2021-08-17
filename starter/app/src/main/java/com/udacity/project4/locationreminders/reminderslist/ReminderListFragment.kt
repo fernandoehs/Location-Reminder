@@ -52,7 +52,7 @@ class ReminderListFragment : BaseFragment() {
 
         //load authentication
         if (FirebaseAuth.getInstance().currentUser == null) {
-            startActivity(Intent(this.activity!!, AuthenticationActivity::class.java))
+            startActivity(Intent(this.requireActivity(), AuthenticationActivity::class.java))
             this.activity?.finish()
         }
 
@@ -61,7 +61,7 @@ class ReminderListFragment : BaseFragment() {
         binding.addReminderFAB.setOnClickListener {
             navigateToAddReminder()
         }
-        }
+    }
 
 
     override fun onResume() {

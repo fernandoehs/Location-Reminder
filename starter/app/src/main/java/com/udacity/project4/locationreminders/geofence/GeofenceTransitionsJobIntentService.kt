@@ -1,5 +1,6 @@
 package com.udacity.project4.locationreminders.geofence
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -23,7 +24,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
 
     companion object {
         private const val JOB_ID = 573
-       // private const val TAG = "GeofenceJobs"
+        private const val TAG = "GeofenceJobs"
 
 
         fun enqueueWork(context: Context, intent: Intent) {
@@ -35,6 +36,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
         }
     }
 
+    @SuppressLint("LogNotTimber")
     override fun onHandleWork(intent: Intent) {
         val geofencingEvent = GeofencingEvent.fromIntent(intent)
 
@@ -43,7 +45,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
 
         if (geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         // Get the geofences that were triggered. A single event can trigger multiple geofences.
-            Log.d("a","This is my message")
+            Log.i("a","This is my message")
         if (geofencingEvent.triggeringGeofences.isNotEmpty()) {
                 sendNotification(geofencingEvent.triggeringGeofences)
           }

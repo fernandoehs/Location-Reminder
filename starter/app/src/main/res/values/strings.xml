@@ -51,5 +51,6 @@
     <string name="detail_reminder_location">location: %s</string>
     <string name="detail_reminder_lat">lat: %.2f</string>
     <string name="detail_reminder_lng">lng: %.2f</string>
+    <string name="confirm">Confirm Location</string>
 
 </resources>

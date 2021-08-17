@@ -25,6 +25,7 @@ import org.mockito.Mockito
 import org.robolectric.annotation.Config
 import java.util.*
 
+@Suppress("DEPRECATION")
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
