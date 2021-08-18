@@ -8,7 +8,8 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -160,9 +161,6 @@ class RemindersActivityTest :
         onView(withId(R.id.reminderDescription)).perform(typeText(reminder.description))
         Espresso.closeSoftKeyboard()
         delay(3000)
-        onView(withId(R.id.selectLocation)).perform(click())
-        onView(withId(R.id.googleMapSupport)).perform(longClick());
-        onView(withId(R.id.saveButton)).perform(click())
 
 
         onView(withId(R.id.selectLocation)).check(matches(isDisplayed()))
@@ -175,6 +173,7 @@ class RemindersActivityTest :
         onView(withId(com.google.android.material.R.id.snackbar_text))
                 .check(matches(withText(R.string.err_select_location)))
         delay(3000)
+
         // Close activity
         activityScenario.close()
     }
