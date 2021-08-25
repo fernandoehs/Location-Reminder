@@ -25,7 +25,6 @@ import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
-import java.util.concurrent.TimeUnit
 
 
 
@@ -38,8 +37,6 @@ class SaveReminderFragment : BaseFragment() {
 
     private val runningQOrLater = android.os.Build.VERSION.SDK_INT >=
             android.os.Build.VERSION_CODES.Q
-
-    private val GEOFENCE_EXPIRATION_IN_MILLISECONDS: Long = TimeUnit.DAYS.toMillis(30)
 
     private val geofencePendingIntent: PendingIntent by lazy {
         val intent = Intent(requireContext(), GeofenceBroadcastReceiver::class.java)
@@ -189,7 +186,7 @@ class SaveReminderFragment : BaseFragment() {
                 reminderDataItem.longitude!!,
                 GEOFENCE_RADIUS_IN_METERS
             )
-            .setExpirationDuration(GEOFENCE_EXPIRATION_IN_MILLISECONDS)
+            .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
             .build()
 
@@ -198,15 +195,14 @@ class SaveReminderFragment : BaseFragment() {
             .addGeofence(geofence)
             .build()
 
-        geofencingClient.removeGeofences(geofencePendingIntent)?.run {
+
+
+        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run{
             addOnCompleteListener {
-        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)
-            .addOnCompleteListener {
                 Log.d("Add Geofence", geofence.requestId)
                 _viewModel.validateAndSaveReminder(reminderDataItem)
-            }}
             }
-
+        }
     }
 
 

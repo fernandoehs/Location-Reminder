@@ -52,5 +52,8 @@
     <string name="detail_reminder_lat">lat: %.2f</string>
     <string name="detail_reminder_lng">lng: %.2f</string>
     <string name="confirm">Confirm Location</string>
+    <string name="location">Location</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
 
 </resources>
