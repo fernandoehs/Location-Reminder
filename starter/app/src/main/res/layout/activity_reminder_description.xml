@@ -87,7 +87,7 @@
             android:text="@{reminderDataItem.longitude.toString()}" />
 
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/closeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

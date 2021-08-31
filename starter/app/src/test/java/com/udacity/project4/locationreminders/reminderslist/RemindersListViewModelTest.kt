@@ -80,7 +80,7 @@ class RemindersListViewModelTest {
             longitude = 0.0,
             id = UUID.randomUUID().toString()
         )
-        dataSource.returnError = false
+        dataSource.shouldReturnError = false
 
         // When
         dataSource.saveReminder(data)
@@ -104,7 +104,7 @@ class RemindersListViewModelTest {
             longitude = 0.0,
             id = UUID.randomUUID().toString()
         )
-        dataSource.returnError = true
+        dataSource.shouldReturnError = true
 
         // When
         dataSource.saveReminder(data)

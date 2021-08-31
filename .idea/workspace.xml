@@ -3,9 +3,98 @@
   <component name="ChangeListManager">
     <list default="true" id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/dictionaries/ThinkpadT440p.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/dictionaries/ThinkpadT440p.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/FakeData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/FakeData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/RemindersActivityTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/RemindersActivityTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/data/local/RemindersDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/data/local/RemindersDaoTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/data/local/RemindersLocalRepositoryTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/data/local/RemindersLocalRepositoryTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/reminderslist/ReminderListFragmentTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/locationreminders/reminderslist/ReminderListFragmentTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/DataBindingIdlingResource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/DataBindingIdlingResource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/SwipeRefreshLayoutMatchers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/SwipeRefreshLayoutMatchers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/ToastMatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/androidTest/java/com/udacity/project4/util/ToastMatcher.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/debug/res/values/google_maps_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/debug/res/values/google_maps_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/MyApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/MyApp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/authentication/AuthenticationActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/authentication/AuthenticationActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/authentication/AuthenticationViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/authentication/AuthenticationViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseRecyclerViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseRecyclerViewAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/BaseViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/DataBindingViewHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/DataBindingViewHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/NavigationCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/base/NavigationCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/ReminderDescriptionActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/ReminderDescriptionActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/RemindersActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/RemindersActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/ReminderDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/ReminderDataSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/dto/ReminderDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/dto/ReminderDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/dto/Result.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/dto/Result.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/LocalDB.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/LocalDB.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersLocalRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/data/local/RemindersLocalRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/geofence/GeofenceBroadcastReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/geofence/GeofenceBroadcastReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/geofence/GeofenceTransitionsJobIntentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/geofence/GeofenceTransitionsJobIntentService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/ReminderDataItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/ReminderDataItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/ReminderListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/ReminderListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/RemindersListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/RemindersListAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/RemindersListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/reminderslist/RemindersListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/selectreminderlocation/SelectLocationFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/selectreminderlocation/SelectLocationFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/BindingAdapters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/BindingAdapters.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/EspressoIdlingResource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/EspressoIdlingResource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/Extensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/Extensions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/FirebaseUserLiveData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/FirebaseUserLiveData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/LocationUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/LocationUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/NotificationUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/NotificationUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/SingleLiveEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/utils/SingleLiveEvent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_add.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_location.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_no_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_no_data.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_save.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/drawable/ic_save.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_authentication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_authentication.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_reminder_description.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_reminder_description.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_reminders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/activity_reminders.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_reminders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_reminders.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_save_reminder.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_save_reminder.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_select_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/fragment_select_location.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/layout/it_reminder.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/layout/it_reminder.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/menu/main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/menu/main_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/menu/map_options.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/menu/map_options.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/raw/map_style.json" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/raw/map_style.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/values-v21/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/release/res/values/google_maps_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/release/res/values/google_maps_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/FakeData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/FakeData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/LiveDataTestUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/LiveDataTestUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/MainCoroutineRule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/MainCoroutineRule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/data/FakeDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/data/FakeDataSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/reminderslist/RemindersListViewModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/reminderslist/RemindersListViewModelTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/savereminder/SaveReminderViewModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/test/java/com/udacity/project4/locationreminders/savereminder/SaveReminderViewModelTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/starter/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/starter/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/starter/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/starter/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/starter/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/starter/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +113,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/starter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="SvnConfiguration">
@@ -41,10 +130,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="448" y="183" key="FileChooserDialogImpl" timestamp="1628667325880">
+    <state x="448" y="183" width="642" height="490" key="FileChooserDialogImpl" timestamp="1629969308954">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="448" y="183" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1628667325880" />
+    <state x="448" y="183" width="642" height="490" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1629969308954" />
     <state x="1786" y="248" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@1366.0.1280.984" timestamp="1625190484801" />
   </component>
 </project>

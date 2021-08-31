@@ -3,10 +3,13 @@ package com.udacity.project4.locationreminders.savereminder.selectreminderlocati
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.*
 import androidx.core.app.ActivityCompat
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
+import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
@@ -213,31 +217,31 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             }
         return foregroundLocationApproved && backgroundPermissionApproved
     }
-//
-//override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//    if (grantResults.isEmpty() ||
-//        grantResults[Constants.LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
-//        (requestCode == Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
-//                grantResults[Constants.BACKGROUND_LOCATION_PERMISSION_INDEX] ==
-//                PackageManager.PERMISSION_DENIED))
-//    {
-//        permSnackbar = Snackbar.make(
-//            binding.root,
-//            R.string.permission_denied_explanation,
-//            Snackbar.LENGTH_LONG
-//        )
-//            .setAction(R.string.settings){
-//                startActivity(Intent().apply {
-//                    action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-//                    data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
-//                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//                })
-//            }
-//        permSnackbar!!.show()
-//    } else {
-//        checkDeviceLocationSettings()
-//    }
-//}
+
+override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    if (grantResults.isEmpty() ||
+        grantResults[Constants.LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
+        (requestCode == Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
+                grantResults[Constants.BACKGROUND_LOCATION_PERMISSION_INDEX] ==
+                PackageManager.PERMISSION_DENIED))
+    {
+        permSnackbar = Snackbar.make(
+            binding.root,
+            R.string.permission_denied_explanation,
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(R.string.settings){
+                startActivity(Intent().apply {
+                    action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+            }
+        permSnackbar!!.show()
+    } else {
+        checkDeviceLocationSettings()
+    }
+}
 
     private fun checkDeviceLocationSettings(resolve: Boolean = true) {
         val locationRequest = LocationRequest.create().apply {
