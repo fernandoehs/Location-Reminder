@@ -15,7 +15,6 @@ import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -38,7 +37,7 @@ import com.udacity.project4.utils.LocationUtils
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS", "DEPRECATION")
+
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     //Use Koin to get the view model of the SaveReminder
@@ -66,16 +65,16 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         binding.viewModel = _viewModel
         binding.lifecycleOwner = this
 
-        binding.saveButton.setOnClickListener {
-
-            if (_viewModel.latLng.value != null){
-                findNavController().popBackStack()
-            }else{
-                _viewModel.showSnackBar.value = getString(R.string.select_location_err)
-            }
-
-
-        }
+//        binding.saveButton.setOnClickListener {
+//
+//            if (_viewModel.latLng.value != null){
+//                findNavController().popBackStack()
+//            }else{
+//                _viewModel.showSnackBar.value = getString(R.string.select_location_err)
+//            }
+//
+//
+//        }
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(true)
 
@@ -176,6 +175,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             Log.e(TAG, "Exception: ${e.message}")
         }
     }
+
     @TargetApi(29)
     private fun requestForegroundAndBackgroundLocationPermissions() {
         if (foregroundAndBackgroundLocationPermissionApproved())
@@ -189,11 +189,14 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             else -> Constants.REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
         }
 
-        ActivityCompat.requestPermissions(
-            requireActivity(),
+    // Solved requestPermissions in Fragments
+       // ActivityCompat.requestPermissions(
+        requestPermissions(
+            //requireActivity(),
             permissionsArray,
             resultCode
         )
+
     }
 
 
@@ -217,6 +220,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             }
         return foregroundLocationApproved && backgroundPermissionApproved
     }
+
 
 override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
     if (grantResults.isEmpty() ||

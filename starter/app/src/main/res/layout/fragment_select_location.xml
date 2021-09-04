@@ -15,6 +15,7 @@
         android:layout_height="match_parent">
 
         <fragment
+            tools:context=".locationreminders.RemindersActivity"
             android:id="@+id/googleMapSupport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
