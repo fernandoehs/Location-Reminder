@@ -15,6 +15,7 @@ import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -65,16 +66,16 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         binding.viewModel = _viewModel
         binding.lifecycleOwner = this
 
-//        binding.saveButton.setOnClickListener {
-//
-//            if (_viewModel.latLng.value != null){
-//                findNavController().popBackStack()
-//            }else{
-//                _viewModel.showSnackBar.value = getString(R.string.select_location_err)
-//            }
-//
-//
-//        }
+        binding.saveButton.setOnClickListener {
+
+            if (_viewModel.latLng.value != null){
+                findNavController().popBackStack()
+            }else{
+                _viewModel.showSnackBar.value = getString(R.string.select_location_err)
+            }
+
+
+        }
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(true)
 
@@ -169,35 +170,35 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
                 map?.isMyLocationEnabled = false
                 map?.uiSettings?.isMyLocationButtonEnabled = false
                 lastKnownLocation = null
-                requestForegroundAndBackgroundLocationPermissions()
+              //  requestForegroundAndBackgroundLocationPermissions()
             }
         } catch (e: SecurityException){
             Log.e(TAG, "Exception: ${e.message}")
         }
     }
 
-    @TargetApi(29)
-    private fun requestForegroundAndBackgroundLocationPermissions() {
-        if (foregroundAndBackgroundLocationPermissionApproved())
-            return
-        var permissionsArray = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        val resultCode = when {
-            runningQOrLater -> {
-                permissionsArray += Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE
-            }
-            else -> Constants.REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
-        }
-
-    // Solved requestPermissions in Fragments
-       // ActivityCompat.requestPermissions(
-        requestPermissions(
-            //requireActivity(),
-            permissionsArray,
-            resultCode
-        )
-
-    }
+//    @TargetApi(29)
+//    private fun requestForegroundAndBackgroundLocationPermissions() {
+//        if (foregroundAndBackgroundLocationPermissionApproved())
+//            return
+//        var permissionsArray = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+//        val resultCode = when {
+//            runningQOrLater -> {
+//                permissionsArray += Manifest.permission.ACCESS_BACKGROUND_LOCATION
+//                Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE
+//            }
+//            else -> Constants.REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
+//        }
+//
+//    // Solved requestPermissions in Fragments
+//       // ActivityCompat.requestPermissions(
+//        requestPermissions(
+//            //requireActivity(),
+//            permissionsArray,
+//            resultCode
+//        )
+//
+//    }
 
 
     @TargetApi(29)
@@ -222,7 +223,11 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     }
 
 
-override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+) {
     if (grantResults.isEmpty() ||
         grantResults[Constants.LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
         (requestCode == Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
@@ -242,10 +247,12 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out
                 })
             }
         permSnackbar!!.show()
-    } else {
-        checkDeviceLocationSettings()
     }
+    //else {
+    //    checkDeviceLocationSettings()
+    //}
 }
+
 
     private fun checkDeviceLocationSettings(resolve: Boolean = true) {
         val locationRequest = LocationRequest.create().apply {
@@ -258,8 +265,16 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out
         locationSettingsResponseTask.addOnFailureListener { exception ->
             if (exception is ResolvableApiException && resolve) {
                 try {
-                    exception.startResolutionForResult(requireActivity(),
-                        Constants.REQUEST_TURN_DEVICE_LOCATION_ON)
+//                    exception.startResolutionForResult(requireActivity(),
+//                        Constants.REQUEST_TURN_DEVICE_LOCATION_ON)
+                    startIntentSenderForResult( exception.resolution.intentSender,
+                            Constants.REQUEST_TURN_DEVICE_LOCATION_ON,
+                            null,
+                            0,
+                            0,
+                            0,
+                            null
+                    )
                 } catch (sendEx: IntentSender.SendIntentException) {
                     Log.d(TAG, "Error getting location settings resolution: ${sendEx.message}")
                 }

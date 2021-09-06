@@ -109,7 +109,7 @@ class RemindersActivityTest :
 
         //SnackBar Error Select Location
         onView(withId(com.google.android.material.R.id.snackbar_text))
-                .check(matches(withText(R.string.err_select_location)))
+                .check(matches(withText(R.string.err_enter_title)))
 
 
         onView(withId(R.id.reminderTitle)).perform(replaceText("New title"))

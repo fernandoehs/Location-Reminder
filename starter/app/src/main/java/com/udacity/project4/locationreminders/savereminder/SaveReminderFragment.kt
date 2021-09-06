@@ -32,6 +32,7 @@ class SaveReminderFragment : BaseFragment() {
     override val _viewModel: SaveReminderViewModel by inject()
     private lateinit var binding: FragmentSaveReminderBinding
     private lateinit var geofencingClient: GeofencingClient
+    private var currentReminder: ReminderDataItem? = null
 
 
     private val runningQOrLater = android.os.Build.VERSION.SDK_INT >=
@@ -129,19 +130,32 @@ class SaveReminderFragment : BaseFragment() {
             else -> REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
         }
 
-        ActivityCompat.requestPermissions(
-                requireActivity(),
+//        ActivityCompat.requestPermissions(
+//                requireActivity(),
+//                permissionsArray,
+//                resultCode
+//        )
+        requestPermissions(
                 permissionsArray,
                 resultCode
         )
+
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_TURN_DEVICE_LOCATION_ON) {
+            checkDeviceLocationSettingsAndStartGeofence(false, currentReminder)
+        }
+    }
+
+
 
     private fun checkDeviceLocationSettingsAndStartGeofence(
             resolve: Boolean = true,
             reminderDataItem: ReminderDataItem? = null
 
     ) {
-
         val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_LOW_POWER
         }
@@ -152,10 +166,15 @@ class SaveReminderFragment : BaseFragment() {
         locationSettingsResponseTask.addOnFailureListener { exception ->
             if (exception is ResolvableApiException && resolve) {
                 try {
-//                    exception.startResolutionForResult( requireActivity(), REQUEST_TURN_DEVICE_LOCATION_ON )
-
-                    
-                    startIntentSenderForResult(exception.resolution.intentSender, REQUEST_CODE_LOCATION_SETTING, null, 0, 0, 0, null)
+//                  exception.startResolutionForResult( requireActivity(), REQUEST_TURN_DEVICE_LOCATION_ON )
+                    startIntentSenderForResult(
+                            exception.resolution.intentSender,
+                            REQUEST_CODE_LOCATION_SETTING,
+                            null,
+                            0,
+                            0,
+                            0,
+                            null)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     sendEx.printStackTrace()
                     //Log.d(TAG, "Error getting location settings resolution: " + sendEx.message)
@@ -219,7 +238,7 @@ class SaveReminderFragment : BaseFragment() {
     companion object {
         private const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
         private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
-        private const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
+        const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
         private const val REQUEST_CODE_LOCATION_SETTING = 123
         private const val TAG = "SaveReminderFragment"
         const val ACTION_GEOFENCE_EVENT = "SaveReminderFragment.project4.action.ACTION_GEOFENCE_EVENT"

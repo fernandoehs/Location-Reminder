@@ -1,6 +1,5 @@
 package com.udacity.project4.authentication
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +18,7 @@ import org.koin.android.ext.android.inject
  * This class should be the starting point of the app, It asks the users to sign in / register, and redirects the
  * signed in users to the RemindersActivity.
  */
-@Suppress("DEPRECATION")
+
 class AuthenticationActivity : AppCompatActivity() {
 
     companion object {
@@ -50,7 +49,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("LogNotTimber")
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SING_IN_CODE) {
