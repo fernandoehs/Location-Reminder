@@ -39,24 +39,24 @@ A Todo list app with location reminders that remind the user to do something whe
 
 # Screen Shots
 <p float="left">
-  <img src="app/src/main/res/drawable/sign_up.jpg" width="150" />
-  <img src="app/src/main/res/drawable/email_input.jpg" width="150" />
-  <img src="app/src/main/res/drawable/empty_screen.jpg" width="150" />
+  <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/email_input.jpg" width="170" />
+  <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/sign_up.jpg" width="170" />
+  <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/empty_screen.jpg" width="170" />
 
 </p>
 
 <p float="left">
-    <img src="app/src/main/res/drawable/task_title.jpg" width="150" />
-   <img src="app/src/main/res/drawable/permission.jpg" width="150" />
-     <img src="app/src/main/res/drawable/map_view.jpg" width="150" />
+    
+   <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/permission.jpg" width="170" />
+     <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/map_view.jpg" width="170" />
  
 </p>
 
 
 <p float="left">
-    <img src="app/src/main/res/drawable/pick_location.jpg" width="150" />
-  <img src="app/src/main/res/drawable/notofication.jpg" width="150"/>
-   <img src="app/src/main/res/drawable/task_detail.jpg" width="150" />
+    <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/pick_location.jpg" width="170" />
+ 
+   <img src="https://github.com/herreraweb/Location-Reminder/blob/main/starter/app/src/main/res/drawable/task_detail.jpg" width="170" />
 
 </p>
 
