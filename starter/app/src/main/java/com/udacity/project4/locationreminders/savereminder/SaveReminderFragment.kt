@@ -7,7 +7,9 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +19,14 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
+import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentSaveReminderBinding
 import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
+import com.udacity.project4.locationreminders.savereminder.selectreminderlocation.SelectLocationFragment
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
 
@@ -33,6 +37,7 @@ class SaveReminderFragment : BaseFragment() {
     private lateinit var binding: FragmentSaveReminderBinding
     private lateinit var geofencingClient: GeofencingClient
     private var currentReminder: ReminderDataItem? = null
+    private var permSnackbar: Snackbar? = null
 
 
     private val runningQOrLater = android.os.Build.VERSION.SDK_INT >=
@@ -144,12 +149,38 @@ class SaveReminderFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_TURN_DEVICE_LOCATION_ON) {
+        if (requestCode == REQUEST_CODE_LOCATION_SETTING) {
             checkDeviceLocationSettingsAndStartGeofence(false, currentReminder)
         }
     }
 
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        if (grantResults.isEmpty() ||
+                grantResults[SelectLocationFragment.Constants.LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
+                (requestCode == SelectLocationFragment.Constants.REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
+                        grantResults[SelectLocationFragment.Constants.BACKGROUND_LOCATION_PERMISSION_INDEX] ==
+                        PackageManager.PERMISSION_DENIED))
+        {
+            permSnackbar = Snackbar.make(
+                    binding.root,
+                    R.string.permission_denied_explanation,
+                    Snackbar.LENGTH_LONG
+            )
+                    .setAction(R.string.settings){
+                        startActivity(Intent().apply {
+                            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        })
+                    }
+            permSnackbar!!.show()
+        }
 
+    }
 
     private fun checkDeviceLocationSettingsAndStartGeofence(
             resolve: Boolean = true,
