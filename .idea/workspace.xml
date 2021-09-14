@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c4d41d69-27b5-4ae2-89a0-f5092ce933f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/SaveReminderFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/selectreminderlocation/SelectLocationFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/starter/app/src/main/java/com/udacity/project4/locationreminders/savereminder/selectreminderlocation/SelectLocationFragment.kt" afterDir="false" />
     </list>
@@ -23,9 +27,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/starter" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -38,12 +43,5 @@
       <updated>1625190247451</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="448" y="183" width="642" height="490" key="FileChooserDialogImpl" timestamp="1629969308954">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="448" y="183" width="642" height="490" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1629969308954" />
-    <state x="1786" y="248" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@1366.0.1280.984" timestamp="1625190484801" />
   </component>
 </project>

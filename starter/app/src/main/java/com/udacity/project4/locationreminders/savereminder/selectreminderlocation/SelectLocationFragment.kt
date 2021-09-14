@@ -1,14 +1,18 @@
 package com.udacity.project4.locationreminders.savereminder.selectreminderlocation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -26,6 +30,7 @@ import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
+import com.udacity.project4.locationreminders.savereminder.selectreminderlocation.SelectLocationFragment.Constants.REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
 import com.udacity.project4.locationreminders.savereminder.selectreminderlocation.SelectLocationFragment.Constants.ZOOM
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
@@ -42,8 +47,6 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     private var permSnackbar: Snackbar? = null
-    private val runningQOrLater = android.os.Build.VERSION.SDK_INT >=
-            android.os.Build.VERSION_CODES.Q
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -143,18 +146,18 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-//    private fun isPermissionGranted() : Boolean {
-//        return ContextCompat.checkSelfPermission(
-//            requireContext(),
-//            Manifest.permission.ACCESS_FINE_LOCATION) === PackageManager.PERMISSION_GRANTED
-//    }
+    private fun isPermissionGranted() : Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
 
 
 
 
 //    @TargetApi(29)
-//    private fun requestForegroundAndBackgroundLocationPermissions() {
-//        if (foregroundAndBackgroundLocationPermissionApproved())
+//    private fun requestForegroundLocationPermissions() {
+//        if (foregroundLocationPermissionApproved())
 //            return
 //        var permissionsArray = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
 //        val resultCode = when {
@@ -177,24 +180,14 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
 
 //    @TargetApi(29)
-//    fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
-//        val foregroundLocationApproved = (
+//    fun foregroundLocationPermissionApproved(): Boolean {
+//
+//        return (
 //                PackageManager.PERMISSION_GRANTED ==
 //                        ActivityCompat.checkSelfPermission(
-//                            requireContext(),
+//                                requireContext(),
 //                            Manifest.permission.ACCESS_FINE_LOCATION
 //                        ))
-//        val backgroundPermissionApproved =
-//            if (runningQOrLater) {
-//                PackageManager.PERMISSION_GRANTED ==
-//                        ActivityCompat.checkSelfPermission(
-//                            requireContext(),
-//                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
-//                        )
-//            } else {
-//                true
-//            }
-//        return foregroundLocationApproved && backgroundPermissionApproved
 //    }
 
 
@@ -236,11 +229,13 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 //    }
 //
 //}
+
+@RequiresApi(Build.VERSION_CODES.Q)
 override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
         grantResults: IntArray) {
-    if (requestCode == REQUEST_LOCATION_PERMISSION) {
+    if (requestCode == REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE) {
         if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
             enableMyLocation()
         }else{
@@ -324,41 +319,44 @@ override fun onRequestPermissionsResult(
 
 
 
-
+    @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
-//    if (isPermissionGranted()) {
+    if (isPermissionGranted()) {
 //      map.isMyLocationEnabled = true
 //////        val location = locationUtils.getBestLocation()
 //       val homeLatLng = LatLng(
 //                Constants.DEFAULT_LAT,
 //                Constants.DEFAULT_LNG)
 //////
-       //val zoom = 15f
+        //val zoom = 15f
 //        map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoom))
 
         if (
-                ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-           ) {
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             //map.setMyLocationEnabled(true)
             map.isMyLocationEnabled = true
             fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location: Location? ->
-                        location?.let {
-                            map.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(
-                                            LatLng(
-                                                    location.latitude,
-                                                    location.longitude
-                                            ),
-                                            ZOOM
-                                    )
+                .addOnSuccessListener { location: Location? ->
+                    location?.let {
+                        map.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    location.latitude,
+                                    location.longitude
+                                ),
+                                ZOOM
                             )
+                        )
 
-                        }
                     }
-           // return
+                }
+            return
         }
+    }
 
     else {
         requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -366,12 +364,21 @@ override fun onRequestPermissionsResult(
     }
 }
 
+//    private fun isPermissionGranted() : Boolean {
+//        return ContextCompat.checkSelfPermission(
+//                requireContext(),
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//        ) == PackageManager.PERMISSION_GRANTED
+//    }
+
 
     object Constants{
-    const val DEFAULT_LAT = 37.422
+
+        const val DEFAULT_LAT = 37.422
     const val DEFAULT_LNG = -122.08
     const val LOCATION_PERMISSION_INDEX = 0
     const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
+    const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
    // const val REQUEST_CODE_LOCATION_SETTING = 123
     const val BACKGROUND_LOCATION_PERMISSION_INDEX = 1
     const val ZOOM = 15f

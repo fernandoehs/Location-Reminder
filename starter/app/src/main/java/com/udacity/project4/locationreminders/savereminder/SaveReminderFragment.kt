@@ -87,9 +87,9 @@ class SaveReminderFragment : BaseFragment() {
                    val longitude = _viewModel.latLng.value?.longitude
 
             reminderDataItem = ReminderDataItem(title, description, location, latitude, longitude)
-            //if(_viewModel.validateEnteredData(item)) {
+            if(_viewModel.validateEnteredData(reminderDataItem)) {
                 checkPermissionsAndStartGeofencing()
-            //}
+            }
         }
     }
 
@@ -136,12 +136,7 @@ class SaveReminderFragment : BaseFragment() {
             }
             else -> REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
         }
-
-//        ActivityCompat.requestPermissions(
-//                requireActivity(),
-//                permissionsArray,
-//                resultCode
-//        )
+        Log.d(TAG, "Request foreground only location permission")
         requestPermissions(
                 permissionsArray,
                 resultCode
@@ -151,7 +146,7 @@ class SaveReminderFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_LOCATION_SETTING) {
+        if (requestCode == REQUEST_TURN_DEVICE_LOCATION_ON) {
             checkDeviceLocationSettingsAndStartGeofence(false)
         }
     }
@@ -192,21 +187,24 @@ class SaveReminderFragment : BaseFragment() {
             priority = LocationRequest.PRIORITY_LOW_POWER
         }
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        val settingsClient = LocationServices.getSettingsClient(requireActivity())
+        val settingsClient = LocationServices.getSettingsClient(requireContext())
         val locationSettingsResponseTask =
             settingsClient.checkLocationSettings(builder.build())
         locationSettingsResponseTask.addOnFailureListener { exception ->
             if (exception is ResolvableApiException && resolve) {
                 try {
-//                  exception.startResolutionForResult( requireActivity(), REQUEST_TURN_DEVICE_LOCATION_ON )
-                    startIntentSenderForResult(
-                            exception.resolution.intentSender,
-                            REQUEST_CODE_LOCATION_SETTING,
-                            null,
-                            0,
-                            0,
-                            0,
-                            null)
+                  exception.startResolutionForResult(
+                          requireActivity(),
+                          REQUEST_TURN_DEVICE_LOCATION_ON
+                  )
+//                    startIntentSenderForResult(
+//                            exception.resolution.intentSender,
+//                            REQUEST_CODE_LOCATION_SETTING,
+//                            null,
+//                            0,
+//                            0,
+//                            0,
+//                            null)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     sendEx.printStackTrace()
                     Log.d(TAG, "Error getting location settings resolution: " + sendEx.message)
@@ -253,7 +251,7 @@ class SaveReminderFragment : BaseFragment() {
             geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
                 addOnCompleteListener {
                     Log.d("Add Geofence", geofence.requestId)
-                    _viewModel.validateAndSaveReminder(reminderDataItem)
+                    _viewModel.validateAndSaveReminder(currentGeofenceData)
                 }
             }
         }
@@ -270,7 +268,8 @@ class SaveReminderFragment : BaseFragment() {
 
 
     companion object {
-        private const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
+        const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
+
         private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
         const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
         private const val REQUEST_CODE_LOCATION_SETTING = 123
