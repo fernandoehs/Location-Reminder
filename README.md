@@ -60,8 +60,6 @@ A Todo list app with location reminders that remind the user to do something whe
 
 </p>
 
-# Author
-**Daniel Ayodeji**
 
 # License
 This project is licensed under the Apache License 2.0 - see : https://www.apache.org/licenses/LICENSE-2.0.txt
